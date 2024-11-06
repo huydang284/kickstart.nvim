@@ -256,6 +256,56 @@ require('lazy').setup({
     },
   },
 
+  -- Add nvim-tree and nvim-web-devicons
+  {
+    'kyazdani42/nvim-tree.lua',
+    requires = {
+      'kyazdani42/nvim-web-devicons', -- optional, for file icons
+    },
+    config = function()
+      require('nvim-tree').setup {
+        disable_netrw = true,
+        hijack_netrw = true,
+        open_on_setup = false,
+        ignore_ft_on_setup = {},
+        auto_close = true,
+        open_on_tab = false,
+        hijack_cursor = false,
+        update_cwd = true,
+        diagnostics = {
+          enable = true,
+          icons = {
+            hint = '',
+            info = '',
+            warning = '',
+            error = '',
+          },
+        },
+        update_focused_file = {
+          enable = true,
+          update_cwd = true,
+          ignore_list = {},
+        },
+        system_open = {
+          cmd = nil,
+          args = {},
+        },
+        view = {
+          width = 30,
+          side = 'left',
+          auto_resize = true,
+          mappings = {
+            custom_only = false,
+            list = {},
+          },
+        },
+      }
+
+      -- Keybinding to toggle nvim-tree
+      vim.api.nvim_set_keymap('n', '<Leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+    end,
+  },
+
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
   -- This is often very useful to both group configuration, as well as handle
@@ -436,6 +486,11 @@ require('lazy').setup({
       end, { desc = '[S]earch [N]eovim files' })
     end,
   },
+  -- Go specific plugins
+  {
+    'fatih/vim-go',
+    run = ':GoUpdateBinaries', -- Automatically install/update binaries
+  },
 
   -- LSP Plugins
   {
@@ -492,6 +547,7 @@ require('lazy').setup({
       --
       -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
       -- and elegantly composed help section, `:help lsp-vs-treesitter`
+      require('lspconfig').gopls.setup {}
 
       --  This function gets run when an LSP attaches to a particular buffer.
       --    That is to say, every time a new file is opened that is associated with
@@ -888,7 +944,7 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'go' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
