@@ -508,6 +508,17 @@ require('lazy').setup({
     'fatih/vim-go',
     run = ':GoUpdateBinaries', -- Automatically install/update binaries
   },
+  
+  {
+    'numToStr/Comment.nvim',
+    config = function()
+      require('Comment').setup()
+
+      vim.keymap.set("n", "<leader>/", "gcc", { remap = true })
+      vim.keymap.set("v", "<leader>/", "gc", { remap = true })
+      vim.keymap.set("v", "<leader>u", [[:s/^\(\s*\)\/\/<CR>]], { noremap = true })
+    end
+  },
 
   -- LSP Plugins
   {
