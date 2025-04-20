@@ -266,8 +266,8 @@ require('lazy').setup({
       require('nvim-tree').setup {
         disable_netrw = true,
         hijack_netrw = true,
-        open_on_setup = false,
-        ignore_ft_on_setup = {},
+        --open_on_setup = false,
+        --ignore_ft_on_setup = {},
         auto_close = true,
         open_on_tab = false,
         hijack_cursor = false,
@@ -293,11 +293,11 @@ require('lazy').setup({
         view = {
           width = 30,
           side = 'left',
-          auto_resize = true,
-          mappings = {
-            custom_only = false,
-            list = {},
-          },
+          --auto_resize = true,
+          -- mappings = {
+          --   custom_only = false,
+          --   list = {},
+          -- },
         },
       }
 
@@ -451,9 +451,9 @@ require('lazy').setup({
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
-      
+
       local function live_grep_with_glob()
-        local input = vim.fn.input('Filetype to search (e.g., lua, py, js): ')
+        local input = vim.fn.input 'Filetype to search (e.g., lua, py, js): '
         if input and #input > 0 then
           builtin.live_grep {
             additional_args = function()
@@ -462,11 +462,10 @@ require('lazy').setup({
             prompt_title = 'Live Grep (' .. input .. ')',
           }
         else
-          print('Invalid input or cancelled!')
+          print 'Invalid input or cancelled!'
         end
       end
 
-      
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
@@ -508,16 +507,16 @@ require('lazy').setup({
     'fatih/vim-go',
     run = ':GoUpdateBinaries', -- Automatically install/update binaries
   },
-  
+
   {
     'numToStr/Comment.nvim',
     config = function()
       require('Comment').setup()
 
-      vim.keymap.set("n", "<leader>/", "gcc", { remap = true })
-      vim.keymap.set("v", "<leader>/", "gc", { remap = true })
-      vim.keymap.set("v", "<leader>u", [[:s/^\(\s*\)\/\/<CR>]], { noremap = true })
-    end
+      vim.keymap.set('n', '<leader>/', 'gcc', { remap = true })
+      vim.keymap.set('v', '<leader>/', 'gc', { remap = true })
+      vim.keymap.set('v', '<leader>u', [[:s/^\(\s*\)\/\/<CR>]], { noremap = true })
+    end,
   },
 
   -- LSP Plugins
