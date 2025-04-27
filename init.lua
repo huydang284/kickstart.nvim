@@ -83,6 +83,7 @@ I hope you enjoy your Neovim journey,
 
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
+require 'custom.keymaps'
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -283,7 +284,7 @@ require('lazy').setup({
         },
         update_focused_file = {
           enable = true,
-          update_cwd = true,
+          update_cwd = false,
           ignore_list = {},
         },
         system_open = {
@@ -299,9 +300,7 @@ require('lazy').setup({
       -- Keybinding to toggle nvim-tree
       vim.api.nvim_set_keymap('n', '<Leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
     end,
-  },
-
-  -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
+  }, -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
   -- This is often very useful to both group configuration, as well as handle
   -- lazy loading plugins that don't need to be loaded immediately at startup.
@@ -889,6 +888,7 @@ require('lazy').setup({
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
         sources = {
+          { name = 'copilot' },
           {
             name = 'lazydev',
             -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
@@ -1007,7 +1007,7 @@ require('lazy').setup({
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
